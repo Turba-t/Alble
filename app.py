@@ -61,7 +61,7 @@ page = st.sidebar.radio("Go to", ["Play", "Stats"])
 
 # Play Page
 if page == "Play":
-    st.title("Albumle")
+    st.title("Alble")
     st.write("Guess the album within 10 attempts!")
 
     current_album = st.session_state["current_album"]
