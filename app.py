@@ -5,34 +5,18 @@ import altair as alt
 
 # Expanded dataset with additional attributes
 albums = [
-    {"name": "Thriller", "year": 1982, "artist_gender": "male", "band_size": 1, "nationality": "American", "genres": ["Pop", "R&B"], "artist": "Micheal Jackson"},
+    {"name": "Thriller", "year": 1982, "artist_gender": "male", "band_size": 1, "nationality": "American", "genres": ["Pop", "R&B"], "artist": "Michael Jackson"},
     {"name": "Rumours", "year": 1977, "artist_gender": "mixed", "band_size": 4, "nationality": "British-American", "genres": ["Rock"], "artist": "Fleetwood Mac"},
     {"name": "The Dark Side of the Moon", "year": 1973, "artist_gender": "male", "band_size": 4, "nationality": "British", "genres": ["Progressive Rock"], "artist": "Pink Floyd"},
-    {"name": "Back in Black", "year": 1980, "artist_gender": "male", "band_size": 4, "nationality": "Australian", "genres": ["Hard Rock"], "artist": "ACDC"},
-    {"name": "21", "year": 2011, "artist_gender": "female", "band_size": 1, "nationality": "British", "genres": ["Soul", "Pop"], "artist": "Adelle"},
+    {"name": "Back in Black", "year": 1980, "artist_gender": "male", "band_size": 4, "nationality": "Australian", "genres": ["Hard Rock"], "artist": "AC/DC"},
+    {"name": "21", "year": 2011, "artist_gender": "female", "band_size": 1, "nationality": "British", "genres": ["Soul", "Pop"], "artist": "Adele"},
     {"name": "Hybrid Theory", "year": 2000, "artist_gender": "male", "band_size": 6, "nationality": "American", "genres": ["Nu Metal", "Rock"], "artist": "Linkin Park"},
-    {"name": "Bad", "year": 1987, "artist_gender": "male", "band_size": 1, "nationality": "American", "genres": ["Pop", "Funk"], "artist": "Micheal Jackson"},
     {"name": "Graduation", "year": 2007, "artist_gender": "male", "band_size": 1, "nationality": "American", "genres": ["Hip Hop", "Pop"], "artist": "Kanye West"},
-    {"name": "My beautiful dark twisted fantasy", "year": 2010, "artist_gender": "male", "band_size": 1, "nationality": "American", "genres": ["Hip Hop", "Pop"], "artist": "Kanye West"},
-    {"name": "To pimp a butterfly", "year": 2015, "artist_gender": "male", "band_size": 1, "nationality": "American", "genres": ["Hip Hop", "Pop"], "artist": "Kendrick Lamar"},
-    {"name": "Kid A", "year": 2000, "artist_gender": "male", "band_size": 5, "nationality": "British", "genres": ["Rock", "Alternative"], "artist": "Radiohead"},
-    {"name": "Ok Computer", "year": 1997, "artist_gender": "male", "band_size": 5, "nationality": "British", "genres": ["Rock", "Alternative"], "artist": "Radiohead"},
-    {"name": "Discovery", "year": 2001, "artist_gender": "male", "band_size": 2, "nationality": "French", "genres": ["Electronic"], "artist": "Daft Punk"},
+    {"name": "To Pimp a Butterfly", "year": 2015, "artist_gender": "male", "band_size": 1, "nationality": "American", "genres": ["Hip Hop", "Pop"], "artist": "Kendrick Lamar"},
     {"name": "Purple Rain", "year": 1984, "artist_gender": "male", "band_size": 1, "nationality": "American", "genres": ["Rock", "Pop"], "artist": "Prince"},
     {"name": "Abbey Road", "year": 1969, "artist_gender": "male", "band_size": 4, "nationality": "British", "genres": ["Rock", "Alternative"], "artist": "The Beatles"},
-    {"name": "Wish you were here", "year": 1975, "artist_gender": "male", "band_size": 4, "nationality": "British", "genres": ["Progressive Rock"], "artist": "Pink Floyd"},
     {"name": "Enter the Wu-Tang", "year": 1993, "artist_gender": "male", "band_size": 9, "nationality": "American", "genres": ["Hip Hop"], "artist": "Wu-Tang Clan"},
-    {"name": "Back To Black", "year": 2007, "artist_gender": "female", "band_size": 1, "nationality": "British", "genres": ["Pop", "Jazz"], "artist": "Amy Whinehouse"},
-    {"name": "Sour", "year": 2021, "artist_gender": "female", "band_size": 1, "nationality": "American", "genres": ["Pop"], "artist": "Olivia Rodrigo"},
-    {"name": "Brat", "year": 2024, "artist_gender": "female", "band_size": 1, "nationality": "British", "genres": ["Electronic"], "artist": "Charli XCX"},
-    {"name": "When We All Fall Asleep Where Do We Go?", "year": 2019, "artist_gender": "female", "band_size": 1, "nationality": "American", "genres": ["Pop"], "artist": "Billie Eilish"},
-    {"name": "Damn", "year": 2017, "artist_gender": "male", "band_size": 1, "nationality": "American", "genres": ["Hip Hop"], "artist": "Kendrick Lamar"},
-    {"name": "Nectar", "year": 2020, "artist_gender": "male", "band_size": 1, "nationality": "Japanese/American", "genres": ["Pop"], "artist": "Joji"},
-    {"name": "The Miseducation of Lauryn Hill", "year": 1998, "artist_gender": "female", "band_size": 1, "nationality": "American", "genres": ["Hip Hop"], "artist": "Lauryn Hill"},
-    {"name": "Brat", "year": 2024, "artist_gender": "female", "band_size": 1, "nationality": "British", "genres": ["Electronic"], "artist": "Charli XCX"},
-    {"name": "Demon Days", "year": 2005, "artist_gender": "mixed", "band_size": 4, "nationality": "British", "genres": ["Pop", "Progressive Rock"], "artist": "Gorillaz"},
-    
-    
+    {"name": "Back to Black", "year": 2007, "artist_gender": "female", "band_size": 1, "nationality": "British", "genres": ["Pop", "Jazz"], "artist": "Amy Winehouse"},
 ]
 
 # Initialize session state
@@ -44,22 +28,16 @@ if "clues_revealed" not in st.session_state:
     st.session_state["clues_revealed"] = 0
 if "game_over" not in st.session_state:
     st.session_state["game_over"] = False
-if "stats" not in st.session_state:
-    st.session_state["stats"] = {
-        "games_played": 0,
-        "wins": 0,
-        "losses": 0,
-        "guesses_per_game": []
-    }
+if "chat_history" not in st.session_state:
+    st.session_state["chat_history"] = []
 
-# Function to update stats
-def update_stats(won, guesses):
-    st.session_state["stats"]["games_played"] += 1
-    if won:
-        st.session_state["stats"]["wins"] += 1
-    else:
-        st.session_state["stats"]["losses"] += 1
-    st.session_state["stats"]["guesses_per_game"].append(guesses)
+# Function to reset the game
+def reset_game():
+    st.session_state["current_album"] = random.choice(albums)
+    st.session_state["guesses"] = 0
+    st.session_state["clues_revealed"] = 0
+    st.session_state["game_over"] = False
+    st.session_state["chat_history"] = []
 
 # Sidebar navigation
 st.sidebar.title("Navigation")
@@ -67,51 +45,54 @@ page = st.sidebar.radio("Go to", ["Play", "Stats"])
 
 # Play Page
 if page == "Play":
-    st.title("Alble")
-    st.write("Guess the album within 10 attempts!")
+    st.title("Alble: Chat Edition")
 
-    current_album = st.session_state["current_album"]
-    user_guess = st.text_input("Your Guess:")
+    # Display chat history
+    for message in st.session_state["chat_history"]:
+        if message["type"] == "user":
+            st.markdown(f"**You:** {message['text']}")
+        else:
+            st.markdown(f"**System:** {message['text']}")
 
-    if user_guess and not st.session_state["game_over"]:
+    # User input
+    user_input = st.text_input("Type your guess or question:")
+
+    if user_input and not st.session_state["game_over"]:
+        st.session_state["chat_history"].append({"type": "user", "text": user_input})
         st.session_state["guesses"] += 1
-        if user_guess.lower() == current_album["name"].lower():
-            st.success(f"Correct! The album was '{current_album['name']}' by {current_album['artist']} 🎉")
-            update_stats(won=True, guesses=st.session_state["guesses"])
+
+        current_album = st.session_state["current_album"]
+        response = ""
+
+        if user_input.lower() == current_album["name"].lower():
+            response = f"🎉 Correct! The album was '{current_album['name']}' by {current_album['artist']}."
             st.session_state["game_over"] = True
         elif st.session_state["guesses"] >= 10:
-            st.error(f"Out of guesses! The correct answer was '{current_album['name']}' by {current_album['artist']}.")
-            update_stats(won=False, guesses=st.session_state["guesses"])
+            response = f"❌ Out of guesses! The correct answer was '{current_album['name']}' by {current_album['artist']}."
             st.session_state["game_over"] = True
         else:
-            st.warning(f"Incorrect! You have {10 - st.session_state['guesses']} guesses left.")
+            response = f"❌ Incorrect! You have {10 - st.session_state['guesses']} guesses left."
             st.session_state["clues_revealed"] += 1
+            # Add clues
+            if st.session_state["clues_revealed"] == 1:
+                response += f" Clue: Year Released - {current_album['year']}."
+            elif st.session_state["clues_revealed"] == 2:
+                response += f" Clue: Artist Gender - {current_album['artist_gender']}."
+            elif st.session_state["clues_revealed"] == 3:
+                response += f" Clue: Band Size - {current_album['band_size']}."
+            elif st.session_state["clues_revealed"] == 4:
+                response += f" Clue: Nationality - {current_album['nationality']}."
+            elif st.session_state["clues_revealed"] == 5:
+                response += f" Clue: Genres - {', '.join(current_album['genres'])}."
+            elif st.session_state["clues_revealed"] >= 6:
+                response += f" Final Clue: Artist - {current_album['artist']}."
 
-    # Display clues if not game over
-    if not st.session_state["game_over"]:
-        if st.session_state["guesses"] > 0:  # Show clues after the first guess
-            st.subheader("Clues:")
-            if st.session_state["clues_revealed"] >= 1:
-                st.write(f"Year Released: {current_album['year']}")
-            if st.session_state["clues_revealed"] >= 2:
-                st.write(f"Artist Gender: {current_album['artist_gender']}")
-            if st.session_state["clues_revealed"] >= 3:
-                st.write(f"Band Size: {current_album['band_size']}")
-            if st.session_state["clues_revealed"] >= 4:
-                st.write(f"Nationality: {current_album['nationality']}")
-            if st.session_state["clues_revealed"] >= 5:
-                st.write(f"Genres: {', '.join(current_album['genres'])}")
-            if st.session_state["clues_revealed"] >= 6:
-                st.write(f"Artist: {current_album['artist']}")
+        st.session_state["chat_history"].append({"type": "system", "text": response})
 
-# Option to play again
-if st.session_state["game_over"]:
+    # Restart option
+    if st.session_state["game_over"]:
         if st.button("Play Again"):
-            st.session_state["current_album"] = random.choice(albums)
-            st.session_state["guesses"] = 0
-            st.session_state["clues_revealed"] = 0
-            st.session_state["game_over"] = False
-
+            reset_game()
 
 
 # Stats Page
