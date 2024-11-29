@@ -106,12 +106,16 @@ if page == "Play":
 
 
     # Option to play again
-    if st.session_state["game_over"]:
-        if st.button("Play Again"):
-            st.session_state["current_album"] = random.choice(albums)
-            st.session_state["guesses"] = 0
-            st.session_state["clues_revealed"] = 0
-            st.session_state["game_over"] = False
+if st.session_state["game_over"]:
+    if st.button("Play Again"):
+        # Reset all relevant game states
+        st.session_state["current_album"] = random.choice(albums)
+        st.session_state["guesses"] = 0
+        st.session_state["clues_revealed"] = 0
+        st.session_state["game_over"] = False
+        st.session_state["user_guess"] = ""  # Clear user guess explicitly
+        st.experimental_rerun()  # Force a fresh rerun of the app
+
 
 # Stats Page
 elif page == "Stats":
