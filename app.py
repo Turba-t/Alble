@@ -104,8 +104,7 @@ if page == "Play":
             if st.session_state["clues_revealed"] >= 6:
                 st.write(f"Artist: {current_album['artist']}")
 
-
-    # Option to play again
+# Option to play again
 if st.session_state["game_over"]:
     if st.button("Play Again"):
         # Reset all relevant game states
@@ -114,7 +113,9 @@ if st.session_state["game_over"]:
         st.session_state["clues_revealed"] = 0
         st.session_state["game_over"] = False
         st.session_state["user_guess"] = ""  # Clear user guess explicitly
-        st.experimental_rerun()  # Force a fresh rerun of the app
+        # Use st.session_state to ensure proper reset
+        st.write("Game restarting... Please wait.")
+
 
 
 # Stats Page
